@@ -26,15 +26,8 @@ namespace June2026ConsoleApp1
             connection.Open();
             Console.WriteLine("Connection is opened");
 
-            string query = @"SELECT TOP (1000) [StudentId]
-      ,[StudentName]
-      ,[FatherName]
-      ,[StudentNo]
-      ,[Email]
-      ,[DateOfBirth]
-      ,[MobileNo]
-  FROM [June2026].[dbo].[Tbl_Student]
-";
+            string query = @"SELECT *
+            FROM [June2026].[dbo].[Tbl_Student]";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             SqlDataAdapter adaper = new SqlDataAdapter(cmd);//carry command and execute
@@ -76,12 +69,12 @@ namespace June2026ConsoleApp1
            ,[Email]
            ,[DateOfBirth]
            ,[MobileNo])
-VALUES
-('John Smith', 'Robert Smith', 'STU001', 'john.smith@gmail.com', '2002-05-15', '09123456789'),
-('Emma Johnson', 'David Johnson', 'STU002', 'emma.johnson@gmail.com', '2001-08-22', '09234567890'),
-('Michael Brown', 'James Brown', 'STU003', 'michael.brown@gmail.com', '2003-01-10', '09345678901'),
-('Sophia Davis', 'William Davis', 'STU004', 'sophia.davis@gmail.com', '2002-11-30', '09456789012'),
-('Daniel Wilson', 'Thomas Wilson', 'STU005', 'daniel.wilson@gmail.com', '2001-07-18', '09567890123');
+            VALUES
+            ('John Smith', 'Robert Smith', 'STU001', 'john.smith@gmail.com', '2002-05-15', '09123456789'),
+            ('Emma Johnson', 'David Johnson', 'STU002', 'emma.johnson@gmail.com', '2001-08-22', '09234567890'),
+            ('Michael Brown', 'James Brown', 'STU003', 'michael.brown@gmail.com', '2003-01-10', '09345678901'),
+            ('Sophia Davis', 'William Davis', 'STU004', 'sophia.davis@gmail.com', '2002-11-30', '09456789012'),
+            ('Daniel Wilson', 'Thomas Wilson', 'STU005', 'daniel.wilson@gmail.com', '2001-07-18', '09567890123');
                                         ";
             SqlCommand cmd = new SqlCommand(query,connection );
             cmd.ExecuteNonQuery();
@@ -105,9 +98,9 @@ VALUES
             connection.Open();
 
             string query = @"UPDATE [dbo].Tbl_Student
-        SET Email = 'john.new@gmail.com',
+            SET Email = 'john.new@gmail.com',
             MobileNo = '09987654321'
-WHERE StudentNo = 'S0001';";
+            WHERE StudentNo = 'S0001';";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.ExecuteNonQuery();
@@ -125,9 +118,9 @@ WHERE StudentNo = 'S0001';";
             SqlConnection connection = new SqlConnection(sb.ConnectionString);
             connection.Open();
             string query = @"DELETE FROM [dbo].Tbl_Student
-            WHERE StudentNo = 'S0005';";
+            WHERE StudentNo = 'S0004';";
             SqlCommand cmd=new SqlCommand(query,connection);    
-            cmd.ExecuteNonQuery();
+            int result=cmd.ExecuteNonQuery();
             connection.Close();
 
         }
