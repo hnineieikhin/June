@@ -23,7 +23,11 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TblStaff3> TblStaff3s { get; set; }
 
+    public virtual DbSet<TblStudent> TblStudents { get; set; }
+
     public virtual DbSet<TblStudent1> TblStudent1s { get; set; }
+
+    public virtual DbSet<TblUser> TblUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -75,6 +79,20 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.StaffName).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<TblStudent>(entity =>
+        {
+            entity.HasKey(e => e.StudentId).HasName("PK__Tbl_Stud__32C52B99E90A3219");
+
+            entity.ToTable("Tbl_Student");
+
+            entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.FatherName).HasMaxLength(50);
+            entity.Property(e => e.MobileNo).HasMaxLength(50);
+            entity.Property(e => e.StudentName).HasMaxLength(50);
+            entity.Property(e => e.StudentNo).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<TblStudent1>(entity =>
         {
             entity.HasKey(e => e.StudentId);
@@ -96,6 +114,17 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.StudentNo)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<TblUser>(entity =>
+        {
+            entity.HasKey(e => e.UserId).HasName("PK__Tbl_User__1788CCACAAE1298A");
+
+            entity.ToTable("Tbl_User");
+
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.UserName).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);
